@@ -34,8 +34,8 @@ router.post('/',function(req,res){
 })
 
 router.get('/',function(req, res){
-    Estaciones.find({},function(err,rutas){
-        res.send(rutas)
+    Agencia.find({},function(err,agencias){
+        res.send(agencias)
     })
 })
 module.exports = router;
