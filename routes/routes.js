@@ -65,4 +65,16 @@ router.put('/:id',function(req,res){
             });
         });
 })
+
+
+
+router.get('/agencia/:id',function(req,res){
+    Rutas.find({'agencia':req.params.id},'_id nombre',function(err,rutas){
+        if(err){
+            res.sendStatus('Error').sendStatus(500)
+        }else{
+            res.send(rutas)
+        }
+    })
+})
 module.exports = router;
