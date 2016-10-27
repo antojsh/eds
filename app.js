@@ -10,7 +10,7 @@ var views = require('./routes/views');
 var routes = require('./routes/routes');
 var estaciones = require('./routes/estaciones');
 var agencias = require('./routes/agencias');
-
+var cors = require('cors')
 
 var mongoose = require('mongoose')
 mongoose.connect('mongodb://127.0.0.1:27017/rutas',function(err,res){
@@ -28,6 +28,7 @@ app.set('view engine', 'jade');
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 //app.use(logger('dev'));
+app.use(cors());
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({ extended: false ,limit: '50mb'}));
 app.use(cookieParser());

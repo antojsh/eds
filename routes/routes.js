@@ -3,6 +3,16 @@ var router = express.Router();
 var Rutas = require('../models/routes')
 
 /* GET users listing. */
+
+router.get('/',function(req,res){
+    Rutas.find({},function(err,rutas){
+        if(err){
+            res.send('Error').status(500)
+        }else{
+            res.send(rutas)
+        }
+    })
+})
 router.get('/:id', function(req, res, next) {
   let id_ruta = req.params.id
   Rutas.find({_id: id_ruta},function(err,ruta){
