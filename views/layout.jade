@@ -1,0 +1,76 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/static/stylesheets/style.css')
+    script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyC29kT7B_aSG7jeJEvxNAwWzI1P5MFNNak')
+    script(src='https://code.jquery.com/jquery-3.1.1.min.js')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', integrity='sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u', crossorigin='anonymous')
+
+    
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js', integrity='sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa', crossorigin='anonymous')
+    link(rel="stylesheet", href="https://bootswatch.com/flatly/bootstrap.min.css")
+    //- link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/css/roboto.min.css')
+    //- link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/css/material-fullpalette.min.css')
+    //- link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/css/ripples.min.css')
+    //- link(rel="stylesheet", href="http://fezvrasta.github.io/bootstrap-material-design/index.css")
+    //- script(src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/js/material.min.js')
+    //- script(src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/js/ripples.min.js')
+
+
+
+  body
+    nav.navbar.navbar-default.navbar-fixed-top
+      .container-fluid
+        .navbar-header
+          a.navbar-brand(href='#')
+            img(alt='Credi100, Fintra logistica', src='http://www.fintra.co/wp-content/uploads/2016/04/fintrafooter.png', style='height:25px;')
+
+    #wrapper
+      #sidebar-wrapper
+        ul.sidebar-nav
+          
+          li(style='margin-top:1em;')
+            a(href='/views') Mapa
+          li
+            a(href='#') Agencias
+              ul.second-menu
+                li
+                  a(href="") Ver Agecias
+                li
+                  a(href="") Crear Agencias
+               
+          li
+            a(href='/views/estaciones') Estaciones
+              ul.second-menu
+                li
+                  a(href="") Ver Estaciones
+                li
+                  a(href="") Crear Estaciones
+                
+          li
+            a(href='/views/estaciones') Rutas
+              ul.second-menu
+                li
+                  a(href="/views/routes/") Ver Rutas
+                li
+                  a(href="/views/routes/new") Crear Rutas
+                
+        
+      #page-content-wrapper
+        .container-fluid
+          .row
+            .col-lg-12
+              block content
+              //- a#menu-toggle.btn.btn-default(href='#menu-toggle') Toggle Menu
+    script.
+        $("#menu-toggle").click(function(e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
+        
+
+
+                
+
+    

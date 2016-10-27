@@ -1,0 +1,87 @@
+extends ../layout
+
+block content
+    .col-xs-12
+        h1 Crear Ruta
+        br
+        .row.well
+            form(id="form-estacion")
+                .col-md-6
+                    .form-group.label-static
+                      label.control-label(for='nombre-ruta') Nombre Ruta
+                      input#nombre-ruta.form-control(type='text', placeholder='Nombre Ruta', required='true')
+                    .form-group.label-static
+                      label.control-label(for='i2') Agencia
+                      select#agencia.form-control(required='true')
+                        option(value='') Seleccione agencia
+                        each agencia in agencias
+                            option(value=agencia._id)= agencia.nombre
+                      
+
+                .col-md-6
+                    .form-group.label-static
+                        label.control-label(for='i2') Seleccionar EDS
+                        ul.list-group
+                          each estacion in estaciones
+                            li.list-group-item(value=estacion._id)= estacion.nombre
+
+                .col-md-12
+                    .form-group.label-static
+                            label.control-label(for='i2', style='width:100%;') Coordenadas
+                            textarea#coordenadas.form-control(rows="4")
+                            p.help-block
+                                | Arreglo de coordenadas
+                                code Convertir previamente
+                    .form-group.label-static
+                          input.btn.btn-primary(type='submit', value='Guardar')
+
+        
+                
+
+
+    script.
+        var hola = !{JSON.stringify(estaciones_rutas)}
+        console.log(JSON.stringify(hola))
+        var rutasescogidas = []
+        $('.list-group').on('click','li',function(){
+            if($(this).hasClass('active')){
+                $(this).removeClass('active')
+                rutasescogidas.pop($(this).attr('value'))
+            }else{
+                $(this).addClass('active')
+                rutasescogidas.push($(this).attr('value'))
+            }
+            console.log(rutasescogidas.length)
+        })
+
+        $('#form-estacion').submit(function(e){
+            e.preventDefault()
+            
+            var eds =[]
+            $('.list-group-item').filter(function(){
+                if($(this).hasClass('active')){
+                    eds.push({"estacion": $(this).attr('value')})
+                }
+                
+            })
+            var estacion = {
+                nombre : $('#nombre-ruta').val(),
+                agencia: String($('#agencia option:selected').attr('value')),
+                coordenadas: JSON.parse($('#coordenadas').val()),
+                estaciones: eds
+            }
+            console.log(JSON.stringify(estacion))
+            $.ajax({url: "/rutas",method:'POST', data:JSON.stringify(estacion),  contentType: "application/json", success: function(result){
+                alert(result);
+            }});
+        }) 
+                      
+               
+
+
+
+                    
+           
+
+
+                  

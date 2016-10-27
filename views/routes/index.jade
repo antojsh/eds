@@ -1,0 +1,31 @@
+extends ../layout
+
+block content
+    .col-xs-12
+        h1 Rutas
+            .row.well
+                .table-responsive
+
+                    table.table.table-striped
+                        thead(style='font-size:1.3rem;')
+                            tr
+                                th Nombre
+                                th Agencia
+                                th Estaciones
+                                th Acciones
+                                
+                        tbody(style='font-size:1.2rem;')
+                            each ruta in rutas
+                                tr
+                                    td= ruta.nombre
+                                    td= ruta.agencia.nombre
+                                    td
+                                        each estacion in ruta.estaciones
+                                            p= estacion.estacion.nombre 
+                                    td 
+                                       a(href='/views/routes/edit/#{ruta._id}')
+                                        |Editar
+    script.
+        var rutas = !{JSON.stringify(rutas)}
+        console.log(rutas)
+                                    
