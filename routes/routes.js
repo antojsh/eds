@@ -15,19 +15,21 @@ router.get('/',function(req,res){
 })
 router.get('/:id', function(req, res, next) {
   let id_ruta = req.params.id
-  Rutas.find({_id: id_ruta},function(err,ruta){
-    if(err){
-      res
-        .send('Error inesperado - '+err)
-        .status(500)
-    }
-    if(!ruta){
-      res
-        .send(ruta)
-        .status(404)
-    }
-    res.send(ruta)
-  })
+  Rutas.find({_id: id_ruta})
+        .populate("estaciones.estacion")
+        .exec(function(err,ruta){
+            if(err){
+                  res
+                    .send('Error inesperado - '+err)
+                    .status(500)
+                }
+                if(!ruta){
+                  res
+                    .send(ruta)
+                    .status(404)
+                }
+                res.send(ruta)
+        })
 });
 
 router.post('/',function(req,res){
